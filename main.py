@@ -5,9 +5,12 @@ import tkinter.messagebox as msgbox
 
 form_class = uic.loadUiType("ui.ui")[0]
 
-global result
+global result, bool
+bool = 0
 fir_value = 0
 sec_value = 0
+#번호로 1 더하기 2 빼기 3 나누기 4 곱하기 = 했을때 번호에 따라 결과값
+operation = 0
 
 
 class WindowClass(QMainWindow, form_class):
@@ -26,14 +29,21 @@ class WindowClass(QMainWindow, form_class):
         self.nine.clicked.connect(self.nine_value)
         self.zero.clicked.connect(self.zero_value)
         self.clear.clicked.connect(self.clear_button)
+        self.plus.clicked.connect(self.plus_)
+
+    def plus_(self):
+        if(fir_value == 0):
+            self.error_message("error","더할 수를 입력해주세요. ")
+        else:
+            bool = 1
+            print(bool)
 
     def clear_button(self):
         fir_value = 0
         sec_value = 0
         result = 0
         self.value.setText(str(fir_value))
-        
-        
+
     def error_message(self, title, message):
         msgbox.showerror(title, message)
 
