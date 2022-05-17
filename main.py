@@ -3,8 +3,6 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 import tkinter.messagebox as msgbox
 
-from pyrsistent import v
-
 form_class = uic.loadUiType("ui.ui")[0]
 
 global result
@@ -27,7 +25,15 @@ class WindowClass(QMainWindow, form_class):
         self.eight.clicked.connect(self.eight_value)
         self.nine.clicked.connect(self.nine_value)
         self.zero.clicked.connect(self.zero_value)
+        self.clear.clicked.connect(self.clear_button)
 
+    def clear_button(self):
+        fir_value = 0
+        sec_value = 0
+        result = 0
+        self.value.setText(str(fir_value))
+        
+        
     def error_message(self, title, message):
         msgbox.showerror(title, message)
 
