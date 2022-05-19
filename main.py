@@ -1,4 +1,3 @@
-from ast import operator
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -41,17 +40,32 @@ class WindowClass(QMainWindow, form_class):
         self.result.clicked.connect(self.result_)
 
     def result_(self):
+        global fir_value
         if(sec_value != 0):
             if(operation == 1):
-                value = fir_value + sec_value 
+                value = fir_value + sec_value
+                fir_value = value
+                fir_sec = 0
+                print(value)
+                print(fir_sec)
+                # self.value.setText(str(sec_value))
             # elif(operation == 2):
-                value = fir_value + sec_value 
+            #     value = fir_value - sec_value
+            #     fir_value = value
+            #     fir_sec = 0
+            #     self.value.setText(str(sec_value))
             # elif(operation == 3):
-                value = fir_value + sec_value 
+            #     value = fir_value / sec_value 
+            #     fir_value = value
+            #     fir_sec = 0
+            #     self.value.setText(str(sec_value))
             # elif(operation == 4):
-                value = fir_value + sec_value 
+            #     value = fir_value * sec_value 
+            #     fir_value = value
+            #     fir_sec = 0
+            #     self.value.setText(str(sec_value))
         else:
-            self.error_message("error",)  
+            self.error_message("error","값을 입력해주세요")  
             
             
     def Operator(self, message, operation_):
