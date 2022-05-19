@@ -7,8 +7,9 @@ form_class = uic.loadUiType("ui.ui")[0]
 
 global result, plus_minuse
 fir_sec = 0
-fir_value = 0
-sec_value = 0
+fir_value = 0.0
+sec_value = 0.0
+result = 0.0
 operation = 0
 plus_minuse = 0
 
@@ -37,45 +38,45 @@ class WindowClass(QMainWindow, form_class):
         self.minus.clicked.connect(self.minus_)
         self.times.clicked.connect(self.times_)
         self.division.clicked.connect(self.division_)
-        self.result.clicked.connect(self.result_)
+        self.result.clicked.connect(self.result__)
 
-    def result_(self):
-        global fir_value
+    def result__(self):
         if(sec_value != 0):
-            if(operation == 1):
-                value = fir_value + sec_value
-                fir_value = value
-                fir_sec = 0
-                print(value)
-                print(fir_sec)
-                # self.value.setText(str(sec_value))
-            # elif(operation == 2):
-            #     value = fir_value - sec_value
-            #     fir_value = value
-            #     fir_sec = 0
-            #     self.value.setText(str(sec_value))
-            # elif(operation == 3):
-            #     value = fir_value / sec_value 
-            #     fir_value = value
-            #     fir_sec = 0
-            #     self.value.setText(str(sec_value))
-            # elif(operation == 4):
-            #     value = fir_value * sec_value 
-            #     fir_value = value
-            #     fir_sec = 0
-            #     self.value.setText(str(sec_value))
+            self.result_()
+            self.value.setText(str(fir_value))
         else:
-            self.error_message("error","값을 입력해주세요")  
-            
-            
+            self.error_message("error", "값을 입력해주세요")
+    def result_(self):
+        global fir_value, operation, fir_sec, sec_value
+
+        if(operation == 1):
+            value = fir_value + sec_value
+            fir_value = value
+        elif(operation == 2):
+            value = fir_value - sec_value
+            fir_value = value
+        elif(operation == 3):
+            value = fir_value / sec_value
+            fir_value = value
+        elif(operation == 4):
+            value = fir_value * sec_value
+            fir_value = value
+        value = 0
+        fir_sec = 0
+        operation = 0
+        sec_value = 0
+
     def Operator(self, message, operation_):
         global fir_sec, operation
-        if(fir_value == 0):
-            self.error_message("error", message+"를 입력해주세요. ")
+        if(sec_value == 0):
+            if(fir_value == 0):
+                self.error_message("error", message+"를 입력해주세요. ")
+            else:
+                fir_sec = 1
+                operation = operation_
+                self.value.setText(str(float(sec_value)))
         else:
-            fir_sec = 1
-            operation = operation_
-            self.value.setText(str(sec_value))
+            self.error_message("error", "결과 값을 내주세요")
 
     def plus_(self):
         self.Operator("더할 수", 1)
@@ -85,13 +86,12 @@ class WindowClass(QMainWindow, form_class):
         self.Operator("나눌 수", 3)
     def times_(self):
         self.Operator("곱할 수", 4)
-
     def clear_button(self):
         global fir_value, sec_value, result, fir_sec
         fir_value = 0
         sec_value = 0
         result = 0
-        self.value.setText(str(fir_value))
+        self.value.setText(str(float(sec_value)))
         fir_sec = 0
 
     def error_message(self, title, message):
@@ -107,8 +107,8 @@ class WindowClass(QMainWindow, form_class):
                     sec_value = number
             else:
                 sec_value = sec_value * 10 + number
-            self.value.setText(str(sec_value))
-            print(sec_value)
+                self.value.setText(str(float(sec_value)))
+                
 
         else:
             if(fir_value == 0):
@@ -118,9 +118,8 @@ class WindowClass(QMainWindow, form_class):
                     fir_value = number
             else:
                 fir_value = fir_value * 10 + number
-            self.value.setText(str(fir_value))
-            print(fir_value)
-            print(fir_sec)
+                self.value.setText(str(float(sec_value))) 
+                
 
     def one_value(self):
         self.number(1)
