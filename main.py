@@ -41,10 +41,21 @@ class WindowClass(QMainWindow, form_class):
         self.result.clicked.connect(self.result_)
 
     def result_(self):
-        print("asdfasdf")
-        
-    def Operator(self,message,operation_):
-        global fir_sec,operation
+        if(sec_value != 0):
+            if(operation == 1):
+                value = fir_value + sec_value 
+            # elif(operation == 2):
+                value = fir_value + sec_value 
+            # elif(operation == 3):
+                value = fir_value + sec_value 
+            # elif(operation == 4):
+                value = fir_value + sec_value 
+        else:
+            self.error_message("error",)  
+            
+            
+    def Operator(self, message, operation_):
+        global fir_sec, operation
         if(fir_value == 0):
             self.error_message("error", message+"를 입력해주세요. ")
         else:
@@ -53,25 +64,21 @@ class WindowClass(QMainWindow, form_class):
             self.value.setText(str(sec_value))
 
     def plus_(self):
-        self.Operator("더할 수",1)
-
+        self.Operator("더할 수", 1)
     def minus_(self):
-        self.Operator("뺄셈",2)
-
+        self.Operator("뺄셈", 2)
     def division_(self):
-        self.Operator("나눌 수",3)
-
+        self.Operator("나눌 수", 3)
     def times_(self):
-        self.Operator("곱할 수",4)
+        self.Operator("곱할 수", 4)
 
     def clear_button(self):
-        global fir_value,sec_value,result,fir_sec
+        global fir_value, sec_value, result, fir_sec
         fir_value = 0
         sec_value = 0
         result = 0
         self.value.setText(str(fir_value))
         fir_sec = 0
-        
 
     def error_message(self, title, message):
         msgbox.showerror(title, message)
@@ -103,31 +110,22 @@ class WindowClass(QMainWindow, form_class):
 
     def one_value(self):
         self.number(1)
-
     def two_value(self):
         self.number(2)
-
     def three_value(self):
         self.number(3)
-
     def four_value(self):
         self.number(4)
-
     def five_value(self):
         self.number(5)
-
     def six_value(self):
         self.number(6)
-
     def seven_value(self):
         self.number(7)
-
     def eight_value(self):
         self.number(8)
-
     def nine_value(self):
         self.number(9)
-
     def zero_value(self):
         self.number(0)
 
