@@ -7,15 +7,11 @@ form_class = uic.loadUiType("ui.ui")[0]
 
 global result, plus_minuse
 fir_sec = 0
-fir_value = 0.0
-sec_value = 0.0
-result = 0.0
+fir_value = 0
+sec_value = 0
+result = 0
 operation = 0
 plus_minuse = 0
-
-#번호로 1 더하기 2 빼기 3 나누기 4 곱하기 = 했을때 번호에 따라 결과값
-#번호로 if줘서 1일때 더하고 하기 ㅋ
-#plus_minuse 가 0일땐 + 1일땐 마이너스로
 
 
 class WindowClass(QMainWindow, form_class):
@@ -39,6 +35,14 @@ class WindowClass(QMainWindow, form_class):
         self.times.clicked.connect(self.times_)
         self.division.clicked.connect(self.division_)
         self.result.clicked.connect(self.result__)
+        self.plus_minus.clicked.connect(self.switch_plus_minus)
+        
+    def switch_plus_minus(self):
+        global fir_value
+        if(plus_minuse == 0):
+            fir_value = -fir_value           
+            print(fir_value) 
+            self.value.setText(str(fir_value))
 
     def result__(self):
         if(sec_value != 0):
@@ -74,7 +78,7 @@ class WindowClass(QMainWindow, form_class):
             else:
                 fir_sec = 1
                 operation = operation_
-                self.value.setText(str(float(sec_value)))
+                self.value.setText(str(sec_value))
         else:
             self.error_message("error", "결과 값을 내주세요")
 
@@ -107,7 +111,7 @@ class WindowClass(QMainWindow, form_class):
                     sec_value = number
             else:
                 sec_value = sec_value * 10 + number
-                self.value.setText(str(float(sec_value)))
+                self.value.setText(str(sec_value))
                 
 
         else:
@@ -118,7 +122,7 @@ class WindowClass(QMainWindow, form_class):
                     fir_value = number
             else:
                 fir_value = fir_value * 10 + number
-                self.value.setText(str(float(sec_value))) 
+                self.value.setText(str(fir_value))
                 
 
     def one_value(self):
@@ -142,7 +146,6 @@ class WindowClass(QMainWindow, form_class):
     def zero_value(self):
         self.number(0)
 
-        #계산할때 변수한개에 저장하거나 배열에 저장하기 ㅋ
 
 
 if __name__ == "__main__":
