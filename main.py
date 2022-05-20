@@ -13,6 +13,7 @@ result = 0
 operation = 0
 plus_minuse = 0
 
+#위에 부호랑 fir_value , sev_value 뜨게하기
 
 class WindowClass(QMainWindow, form_class):
     def __init__(self):
@@ -77,7 +78,7 @@ class WindowClass(QMainWindow, form_class):
             else:
                 fir_sec = 1
                 operation = operation_
-                self.value.setText(str(sec_value))
+                self.value.setText(str(fir_value))
         else:
             self.error_message("error", "결과 값을 내주세요")
 
