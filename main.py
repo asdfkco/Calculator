@@ -18,7 +18,6 @@ class WindowClass(QMainWindow, form_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.value.setText("0")
         self.one.clicked.connect(self.one_value)
         self.two.clicked.connect(self.two_value)
         self.three.clicked.connect(self.three_value)
@@ -95,8 +94,8 @@ class WindowClass(QMainWindow, form_class):
         fir_value = 0
         sec_value = 0
         result = 0
-        self.value.setText(str(float(sec_value)))
         fir_sec = 0
+        self.value.setText(str(float(sec_value)))
 
     def error_message(self, title, message):
         msgbox.showerror(title, message)
@@ -109,17 +108,17 @@ class WindowClass(QMainWindow, form_class):
                     self.error_message("error", "0으로 시작할 수 없습니다.")
                 else:
                     sec_value = number
+                    self.value.setText(str(sec_value))
             else:
                 sec_value = sec_value * 10 + number
                 self.value.setText(str(sec_value))
-                
-
         else:
             if(fir_value == 0):
                 if(number == 0):
                     self.error_message("error", "0으로 시작할 수 없습니다.")
                 else:
                     fir_value = number
+                    self.value.setText(str(fir_value))
             else:
                 fir_value = fir_value * 10 + number
                 self.value.setText(str(fir_value))
