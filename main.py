@@ -5,13 +5,12 @@ import tkinter.messagebox as msgbox
 
 form_class = uic.loadUiType("ui.ui")[0]
 
-global result, plus_minuse
+result = 0
 fir_sec = 0
 fir_value = 0
 sec_value = 0
 result = 0
 operation = 0
-plus_minuse = 0
 fir_exp_value = 0
 sec_exp_value = 0
 op_exp_value = 0
@@ -55,13 +54,12 @@ class WindowClass(QMainWindow, form_class):
 
     def switch_plus_minus(self):
         global fir_value, sec_value
-        if(plus_minuse == 0):
-            if(operation == 0):
-                fir_value = -fir_value
-                self.value.setText("\n"+str(fir_value))
-            else:
-                sec_value = -sec_value
-                self.op_text()
+        if(operation == 0):
+            fir_value = -fir_value
+            self.value.setText("\n"+str(fir_value))
+        else:
+            sec_value = -sec_value
+            self.op_text()
 
     def result__(self):
         if(sec_value != 0):
@@ -139,18 +137,7 @@ class WindowClass(QMainWindow, form_class):
 
     def number(self, number):
         global fir_value, sec_value, operation
-        if(fir_sec == 1):
-            if(sec_value == 0):
-                if(number == 0):
-                    self.error_message("error", "0으로 시작할 수 없습니다.")
-                else:
-                    sec_value = number
-                    self.op_text()
-            else:
-                sec_value = sec_value * 10 + number
-                self.op_text()
-
-        else:
+        if(fir_sec == 0):
             if(fir_value == 0):
                 if(number == 0):
                     self.error_message("error", "0으로 시작할 수 없습니다.")
@@ -158,9 +145,28 @@ class WindowClass(QMainWindow, form_class):
                     fir_value = number
                     self.value.setText("\n"+str(fir_value))
             else:
-                fir_value = fir_value * 10 + number
-                self.value.setText("\n"+str(fir_value))
-
+                if(fir_value > 0):
+                    fir_value = fir_value * 10 + number
+                    self.value.setText("\n"+str(fir_value))
+                elif(fir_value < 0):
+                    fir_value = fir_value * 10 - number
+                    self.value.setText("\n"+str(fir_value))
+            
+        else:
+            if(sec_value == 0):
+                if(number == 0):
+                    self.error_message("error", "0으로 시작할 수 없습니다.")
+                else:
+                    sec_value = number
+                    self.op_text()
+            else:
+                if(sec_value > 0):
+                    sec_value = sec_value * 10 + number
+                    self.op_text()
+                elif(sec_value < 0):
+                    sec_value = sec_value * 10 - number
+                    self.op_text()
+                            
     def one_value(self):
         self.number(1)
 
